@@ -1,20 +1,22 @@
 package router
 
 import (
+	"net/http"
+
 	"github.com/yunc98/go-todo-app/controller"
 
 	"github.com/gin-gonic/gin"
 )
 
 func Init() {
-	r := gin.Default()
+	router := gin.Default()
 
-	r.GET("/", func(c *gin.Context) {
-		c.String(200, "Hello, World")
+	router.GET("/", func(c *gin.Context) {
+		c.String(http.StatusOK, "Hello, World")
 	})
 
-	r.GET("/todo/:id", controller.GetTodo)
-	// r.POST("/todo", controller.CreateTodo)
+	router.GET("/todo/:id", controller.GetTodo)
+	router.POST("/todo", controller.CreateTodo)
 
-	r.Run()
+	router.Run()
 }
