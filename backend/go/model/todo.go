@@ -19,3 +19,11 @@ func (p *Todo) Create() (tx *gorm.DB) {
 func (p *Todo) Update() (tx *gorm.DB) {
 	return db.Save(&p)
 }
+
+func (p *Todo) Delete() (tx *gorm.DB) {
+	return db.Delete(&p)
+}
+
+func (p *Todo) DeleteById(id uint) (tx *gorm.DB) {
+	return db.Where("id = ?", id).Delete(&p)
+}

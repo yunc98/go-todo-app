@@ -78,3 +78,23 @@ func UpdateTodo(c *gin.Context) {
 
 	c.JSON(http.StatusOK, todo)
 }
+
+func DeleteTodo(c *gin.Context) {
+	i, err := strconv.Atoi(c.Param("id"))
+	id := uint(i)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid parameter ID"})
+		return
+	}
+
+	todo := model.Todo{}
+	if err := todo.FirstById(id).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Record not found!"})
+		return
+	}
+
+	todo.DeleteById(id)
+
+	c.JSON(http.StatusOK, todo)
+}
