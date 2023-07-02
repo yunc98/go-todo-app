@@ -46,3 +46,35 @@ func CreateTodo(c *gin.Context) {
 
 	c.JSON(http.StatusOK, todo)
 }
+
+func UpdateTodo(c *gin.Context) {
+	i, err := strconv.Atoi(c.Param("id"))
+	id := uint(i)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid parameter ID"})
+		return
+	}
+
+	todo := model.Todo{}
+	if err := todo.FirstById(id).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Record not found!"})
+		return
+	}
+
+	title := c.PostForm("title")
+	comp, err := strconv.ParseBool(c.PostForm("completed"))
+	completed := bool(comp)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid parameter 'completed'"})
+		return
+	}
+
+	todo.Title = title
+	todo.Completed = completed
+
+	todo.Update()
+
+	c.JSON(http.StatusOK, todo)
+}

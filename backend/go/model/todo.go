@@ -15,3 +15,7 @@ func (p *Todo) FirstById(id uint) (tx *gorm.DB) {
 func (p *Todo) Create() (tx *gorm.DB) {
 	return db.Create(&p)
 }
+
+func (p *Todo) Update() (tx *gorm.DB) {
+	return db.Save(&p)
+}

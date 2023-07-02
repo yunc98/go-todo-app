@@ -17,6 +17,7 @@ func Init() {
 
 	router.GET("/todo/:id", controller.GetTodo)
 	router.POST("/todo", controller.CreateTodo)
+	router.PUT("/todo/:id", controller.UpdateTodo)
 
 	router.Run()
 }
