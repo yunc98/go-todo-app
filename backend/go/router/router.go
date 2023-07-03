@@ -11,6 +11,8 @@ import (
 func Init() {
 	router := gin.Default()
 
+	router.Use(CorsMiddleware())
+
 	router.GET("/", func(c *gin.Context) {
 		c.String(http.StatusOK, "Hello, World")
 	})
@@ -22,4 +24,20 @@ func Init() {
 	router.DELETE("/todo/:id", controller.DeleteTodoById)
 
 	router.Run()
+}
+
+func CorsMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE")
+
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(204)
+			return
+		}
+
+		c.Next()
+	}
 }
