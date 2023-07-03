@@ -15,10 +15,11 @@ func Init() {
 		c.String(http.StatusOK, "Hello, World")
 	})
 
-	router.GET("/todo/:id", controller.GetTodo)
+	router.GET("/todo", controller.GetTodos)
+	router.GET("/todo/:id", controller.GetTodoById)
 	router.POST("/todo", controller.CreateTodo)
-	router.PUT("/todo/:id", controller.UpdateTodo)
-	router.DELETE("/todo/:id", controller.DeleteTodo)
+	router.PUT("/todo/:id", controller.UpdateTodoById)
+	router.DELETE("/todo/:id", controller.DeleteTodoById)
 
 	router.Run()
 }

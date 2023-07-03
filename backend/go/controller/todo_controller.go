@@ -9,7 +9,19 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetTodo(c *gin.Context) {
+func GetTodos(c *gin.Context) {
+	todo := model.Todo{}
+	todos, err := todo.GetAll()
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "No record found"})
+		return
+	}
+
+	c.JSON(http.StatusOK, todos)
+}
+
+func GetTodoById(c *gin.Context) {
 	i, err := strconv.Atoi(c.Param("id"))
 
 	if err != nil {
@@ -47,7 +59,7 @@ func CreateTodo(c *gin.Context) {
 	c.JSON(http.StatusOK, todo)
 }
 
-func UpdateTodo(c *gin.Context) {
+func UpdateTodoById(c *gin.Context) {
 	i, err := strconv.Atoi(c.Param("id"))
 	id := uint(i)
 
@@ -79,7 +91,7 @@ func UpdateTodo(c *gin.Context) {
 	c.JSON(http.StatusOK, todo)
 }
 
-func DeleteTodo(c *gin.Context) {
+func DeleteTodoById(c *gin.Context) {
 	i, err := strconv.Atoi(c.Param("id"))
 	id := uint(i)
 

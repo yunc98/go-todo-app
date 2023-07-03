@@ -8,6 +8,16 @@ type Todo struct {
 	Completed bool   `json:"completed"`
 }
 
+func (p *Todo) GetAll() ([]Todo, error) {
+	var todos []Todo
+	
+	if err := db.Find(&todos).Error; err != nil {
+		return nil, err
+	}
+
+	return todos, nil
+}
+
 func (p *Todo) FirstById(id uint) (tx *gorm.DB) {
 	return db.Where("id = ?", id).First(&p)
 }
