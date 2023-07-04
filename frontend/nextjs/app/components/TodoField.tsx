@@ -35,12 +35,32 @@ export default function TodoField({ todo }: { todo: Todo }) {
       });
   };
 
+  const handleDelete = async () => {
+    await fetch(`http://localhost:8080/todo/${todo.ID}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    })
+      .then(() => {
+        router.refresh();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
-    <div className="flex gap-2">
-      <button onClick={() => handleCompleted()}>
-        {todo.completed ? '✅' : '⬜'}
+    <div className="flex justify-between">
+      <div className="flex gap-8">
+        <button onClick={() => handleCompleted()}>
+          {todo.completed ? '✅' : '⬜'}
+        </button>
+        <p>{todo.title}</p>
+      </div>
+      <button onClick={() => handleDelete()} className="text-xs">
+        ❌
       </button>
-      <p>{todo.title}</p>
     </div>
   );
 }
