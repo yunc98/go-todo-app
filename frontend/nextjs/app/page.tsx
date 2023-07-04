@@ -1,3 +1,4 @@
+import Input from './components/Input';
 import TodoList from './components/TodoList';
 
 const getAllTodos = async () => {
@@ -16,6 +17,7 @@ export default async function Home() {
     <main>
       <div className="z-10 w-full max-w-5xl items-center justify-between">
         <h1 className="text-center">Todo list😁</h1>
+        <Input />
         <TodoList promise={todosData} />
       </div>
     </main>
