@@ -2,7 +2,7 @@
 
 ### 使用技術
 
-- Typescript 5.1.3
+- TypeScript 5.1.3
 - Next.js 13.4.7
 - Tailwind CSS 3.3.2
 - Go 1.16
