@@ -23,3 +23,13 @@ body {
     @apply my-2 text-base;
   }
 }
+
+@layer components {
+  .input input {
+    @apply h-8 rounded-md border border-gray-800 px-4 text-xs;
+  }
+
+  .input button {
+    @apply rounded-md bg-gray-800 px-4 py-1 text-xs text-white;
+  }
+}

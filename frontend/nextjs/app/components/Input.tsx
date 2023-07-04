@@ -37,14 +37,16 @@ export default function Input() {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Add a new todo"
-        value={newTodo}
-        onChange={onChangeNewTodo}
-      />
-      <button onClick={onClickAddNewTodo}>Add</button>
+    <div className="mb-10 flex justify-center">
+      <div className="input flex gap-4">
+        <input
+          type="text"
+          placeholder="Add a new todo"
+          value={newTodo}
+          onChange={onChangeNewTodo}
+        />
+        <button onClick={onClickAddNewTodo}>Add</button>
+      </div>
     </div>
   );
 }

@@ -15,8 +15,8 @@ export default async function Home() {
 
   return (
     <main>
-      <div className="z-10 w-full max-w-5xl items-center justify-between">
-        <h1 className="text-center">Todo list😁</h1>
+      <div className="z-10 w-full max-w-2xl items-center justify-between">
+        <h1 className="mb-10 text-center">Todo list😁</h1>
         <Input />
         <TodoList promise={todosData} />
       </div>
